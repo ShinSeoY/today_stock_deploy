@@ -29,9 +29,9 @@ spec:
 
           {{- with .Values.backend.envFromSecrets }}
           envFrom:
-            {{- range . }}
+            {{- range $i, $item := . }}
             - secretRef:
-                name: {{ .name }}
+                name: {{- if kindIs "string" $item -}}{{ $item }}{{- else -}}{{ index $item "name" }}{{- end }}
             {{- end }}
           {{- end }}
 
