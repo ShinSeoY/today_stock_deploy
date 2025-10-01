@@ -22,7 +22,7 @@ backend:
             cpu: '1'
             memory: 1536Mi
     probes:
-        path: /health
+        path: /actuator/health
 
 frontend:
     replicas: 1
