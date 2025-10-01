@@ -21,11 +21,6 @@ spec:
           imagePullPolicy: "{{ .Values.backend.image.pullPolicy }}"
           ports:
             - containerPort: {{ .Values.backend.port }}
-          env:
-          {{- range .Values.backend.env }}
-            - name: {{ .name }}
-              value: "{{ .value }}"
-          {{- end }}
 			    {{- if .Values.backend.envFromSecrets }}
 			    envFrom:
 			      {{- range .Values.backend.envFromSecrets }}
