@@ -5,7 +5,8 @@ metadata:
     namespace: { { .Values.namespace } }
 spec:
     type: ClusterIP
-    selector: { app: frontend }
+    selector:
+        app: frontend
     ports:
         - name: http
           port: 3000
