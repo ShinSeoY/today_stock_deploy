@@ -30,7 +30,7 @@ frontend:
         repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/frontend
         tag: 'latest'
         pullPolicy: Always
-    port: 3000
+    port: 80
     resources:
         requests:
             cpu: 100m
