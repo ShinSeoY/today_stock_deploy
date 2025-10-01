@@ -2,7 +2,7 @@ namespace: today-stock
 
 ingress:
     enabled: true
-    host: today-stock.local
+    host: 15.164.100.66
 
 backend:
     replicas: 1
