@@ -31,7 +31,7 @@ spec:
           envFrom:
             {{- range $i, $item := . }}
             - secretRef:
-                name: {{- if kindIs "string" $item -}}{{ $item }}{{- else -}}{{ index $item "name" }}{{- end }}
+                name: {{ if kindIs "string" $item }}{{ $item }}{{ else }}{{ index $item "name" }}{{ end }}
             {{- end }}
           {{- end }}
 
