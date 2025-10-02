@@ -7,7 +7,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$1"
 spec:
   ingressClassName: nginx
   rules:
@@ -16,6 +16,7 @@ spec:
       {{- end }}
       http:
         paths:
+          # /api, /api/*  → backend ("/api" 접두어 제거)
           - path: /api/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -23,6 +24,8 @@ spec:
                 name: backend
                 port:
                   number: 8080
+
+          # /kafka, /kafka/* → kafka-ui ("/kafka" 접두어 제거)
           - path: /kafka/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -30,6 +33,8 @@ spec:
                 name: kafka-ui
                 port:
                   number: 8080
+
+          # /airflow, /airflow/* → airflow-webserver ("/airflow" 접두어 제거)
           - path: /airflow/?(.*)
             pathType: ImplementationSpecific
             backend:
@@ -37,7 +42,9 @@ spec:
                 name: airflow-webserver
                 port:
                   number: 8080
-          - path: /(.*) 
+
+          # 그 외 전부 프런트(정적파일/SPA 라우팅 그대로 전달, 리라이트 없음)
+          - path: /(.*)
             pathType: ImplementationSpecific
             backend:
               service:
