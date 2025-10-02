@@ -16,28 +16,28 @@ spec:
       {{- end }}
       http:
         paths:
-          - path: /api(/|$)(.*)
+          - path: /api/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: backend
                 port:
                   number: 8080
-          - path: /kafka(/|$)(.*)
+          - path: /kafka/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: kafka-ui
                 port:
                   number: 8080
-          - path: /airflow(/|$)(.*)
+          - path: /airflow/?(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: airflow-webserver
                 port:
                   number: 8080
-          - path: /(.*)
+          - path: /(.*) 
             pathType: ImplementationSpecific
             backend:
               service:
