@@ -1,42 +1,37 @@
 namespace: today-stock
-
 ingress:
-    enabled: true
-
+  enabled: true
 backend:
-    replicas: 1
-    image:
-        repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/backend
-        tag: 'latest'
-        pullPolicy: Always
-    port: 8080
-
-    envFromSecrets:
-      - name: backend-app-secrets
-
-    resources:
-        requests:
-            cpu: 300m
-            memory: 512Mi
-        limits:
-            cpu: '1'
-            memory: 1536Mi
-    probes:
-        path: /actuator/health
-
+  replicas: 1
+  image:
+    repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/backend
+    tag: '869abe4'
+    pullPolicy: Always
+  port: 8080
+  envFromSecrets:
+    - name: backend-app-secrets
+  resources:
+    requests:
+      cpu: 300m
+      memory: 512Mi
+    limits:
+      cpu: '1'
+      memory: 1536Mi
+  probes:
+    path: /actuator/health
 frontend:
-    replicas: 1
-    image:
-        repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/frontend
-        tag: 'latest'
-        pullPolicy: Always
-    port: 80
-    resources:
-        requests:
-            cpu: 100m
-            memory: 256Mi
-        limits:
-            cpu: 300m
-            memory: 512Mi
-    probes:
-        path: /
+  replicas: 1
+  image:
+    repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/frontend
+    tag: 'latest'
+    pullPolicy: Always
+  port: 80
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  probes:
+    path: /
