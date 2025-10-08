@@ -6,6 +6,11 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header X-Forwarded-Host $host;
+      proxy_set_header X-Forwarded-Prefix /airflow;
 spec:
   ingressClassName: nginx
   rules:
