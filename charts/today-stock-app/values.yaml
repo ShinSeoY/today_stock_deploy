@@ -23,7 +23,7 @@ frontend:
   replicas: 1
   image:
     repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/frontend
-    tag: '3265c72'
+    tag: '2908a42'
     pullPolicy: Always
   port: 80
   resources:
