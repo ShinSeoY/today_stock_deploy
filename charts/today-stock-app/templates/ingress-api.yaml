@@ -6,12 +6,16 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    cert-manager.io/cluster-issuer: letsencrypt
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: "/$1"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host}}
+      secretName: todaystock-tls
   rules:
-    - {{- if .Values.ingress.host }}host: {{ .Values.ingress.host }}{{- end }}
       http:
         paths:
           - path: /api/?(.*)

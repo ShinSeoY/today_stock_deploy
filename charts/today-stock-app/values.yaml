@@ -1,6 +1,7 @@
 namespace: today-stock
 ingress:
   enabled: true
+  host: 3-39-234-232.sslip.io
 backend:
   replicas: 1
   image:
