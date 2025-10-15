@@ -2,29 +2,23 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: today-stock-web
+  name: today-stock-airflow-webserver
   namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: "/$2"
     nginx.ingress.kubernetes.io/use-forwarded-headers: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /
-            pathType: Prefix
+          - path: /airflow(/|$)(.*)
+            pathType: ImplementationSpecific
             backend:
               service:
-                name: frontend
-                port:
-                  number: 80
-          - path: /kafka
-            pathType: Prefix
-            backend:
-              service:
-                name: kafka-ui
+                name: airflow-webserver
                 port:
                   number: 8080
 {{- end }}
