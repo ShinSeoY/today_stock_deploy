@@ -28,7 +28,9 @@ spec:
           imagePullPolicy: "{{ .Values.backend.image.pullPolicy }}"
           ports:
             - containerPort: {{ .Values.backend.port }}
-
+          env:
+            - name: SERVER_FORWARD_HEADERS_STRATEGY
+              value: framework
           {{- with .Values.backend.envFromSecrets }}
           envFrom:
             {{- range $i, $item := . }}
