@@ -6,26 +6,18 @@ metadata:
   namespace: {{ .Values.namespace }}
   annotations:
     kubernetes.io/ingress.class: "nginx"
-    {% comment %} cert-manager.io/cluster-issuer: letsencrypt {% endcomment %}
     nginx.ingress.kubernetes.io/use-regex: "true"
     nginx.ingress.kubernetes.io/rewrite-target: "/$1"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
-spec:
-  ingressClassName: nginx
-  {% comment %} tls:
-    - hosts:
-        - {{ .Values.ingress.host}}
-      secretName: todaystock-tls {% endcomment %}
-  rules:
-    {% comment %} - host: {{ .Values.ingress.host }} {% endcomment %}
-      http:
-        paths:
-          - path: /api/?(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: backend
-                port:
-                  number: 8080
+  spec:
+    ingressClassName: nginx
+    rules:
+      - http:
+          paths:
+            - path: /api/?(.*)
+              pathType: ImplementationSpecific
+              backend:
+                service:
+                  name: backend
+                  port:
+                    number: 8080
 {{- end }}
