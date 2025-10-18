@@ -13,11 +13,10 @@ spec:
     - http:
         paths:
           - path: /airflow(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: airflow-webserver
                 port:
                   name: airflow-ui
-                  number: 8080
 {{- end }}
