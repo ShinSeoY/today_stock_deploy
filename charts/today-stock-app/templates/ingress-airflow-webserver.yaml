@@ -4,10 +4,6 @@ kind: Ingress
 metadata:
   name: today-stock-airflow-webserver
   namespace: {{ .Values.namespace }}
-  annotations:
-    nginx.ingress.kubernetes.io/configuration-snippet: |
-      rewrite ^/airflow$ /airflow/ permanent;
-      proxy_set_header X-Script-Name /airflow;
 spec:
   ingressClassName: nginx
   rules:
