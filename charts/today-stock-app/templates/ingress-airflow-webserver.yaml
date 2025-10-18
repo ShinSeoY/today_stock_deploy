@@ -18,5 +18,5 @@ spec:
               service:
                 name: airflow-webserver
                 port:
-                  name: airflow-ui
+                  number: 8080
 {{- end }}
