@@ -4,16 +4,13 @@ kind: Ingress
 metadata:
   name: today-stock-airflow-webserver
   namespace: {{ .Values.namespace }}
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
     - http:
         paths:
-          - path: /airflow(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /airflow
+            pathType: Prefix
             backend:
               service:
                 name: airflow-webserver
