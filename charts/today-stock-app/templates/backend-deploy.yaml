@@ -45,7 +45,7 @@ spec:
               port: {{ .Values.backend.port }}
             initialDelaySeconds: 120
             periodSeconds: 5
-            timeoutSeconds: 2
+            timeoutSeconds: 10
             failureThreshold: 6
 
           livenessProbe:
@@ -54,7 +54,7 @@ spec:
               port: {{ .Values.backend.port }}
             initialDelaySeconds: 120
             periodSeconds: 10
-            timeoutSeconds: 2
+            timeoutSeconds: 10
 
           resources:
             requests:
