@@ -6,7 +6,7 @@ backend:
   replicas: 1
   image:
     repository: 711784092532.dkr.ecr.ap-northeast-2.amazonaws.com/today-stock/backend
-    tag: '7281994'
+    tag: 'c3aff27'
     pullPolicy: Always
   port: 8080
   envFromSecrets:
