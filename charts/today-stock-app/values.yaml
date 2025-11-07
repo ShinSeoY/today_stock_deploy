@@ -11,8 +11,6 @@ backend:
   port: 8080
   volumes:
     secretName: backend-app-secrets
-#   envFromSecrets:
-#     - name: backend-app-secrets
   resources:
     requests:
       cpu: 300m
