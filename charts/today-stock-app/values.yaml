@@ -9,8 +9,10 @@ backend:
     tag: '6d201f3'
     pullPolicy: Always
   port: 8080
-  envFromSecrets:
-    - name: backend-app-secrets
+  volumes:
+    secretName: backend-app-secrets
+#   envFromSecrets:
+#     - name: backend-app-secrets
   resources:
     requests:
       cpu: 300m

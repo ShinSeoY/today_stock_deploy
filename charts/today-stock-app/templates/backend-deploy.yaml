@@ -31,13 +31,16 @@ spec:
           env:
             - name: SERVER_FORWARD_HEADERS_STRATEGY
               value: framework
-          {{- with .Values.backend.envFromSecrets }}
+          volumeMounts:
+            - name: backend-secret-vol
+              mountPath: /etc/backend-secrets
+          {% comment %} {{- with .Values.backend.envFromSecrets }}
           envFrom:
             {{- range $i, $item := . }}
             - secretRef:
                 name: {{ if kindIs "string" $item }}{{ $item }}{{ else }}{{ index $item "name" }}{{ end }}
             {{- end }}
-          {{- end }}
+          {{- end }} {% endcomment %}
 
           readinessProbe:
             httpGet:
@@ -63,3 +66,7 @@ spec:
             limits:
               cpu: {{ .Values.backend.resources.limits.cpu }}
               memory: {{ .Values.backend.resources.limits.memory }}
+      volumes:
+        - name: backend-secret-vol
+          secret:
+            secretName: {{ .Values.backend.volumes.secretName }}
