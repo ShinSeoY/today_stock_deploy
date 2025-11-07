@@ -31,6 +31,8 @@ spec:
           env:
             - name: SERVER_FORWARD_HEADERS_STRATEGY
               value: framework
+            - name: SPRING_CONFIG_IMPORT
+              value: optional:file:/etc/backend-secrets/application-secrets.properties
           volumeMounts:
             - name: backend-secret-vol
               mountPath: /etc/backend-secrets
@@ -62,3 +64,6 @@ spec:
         - name: backend-secret-vol
           secret:
             secretName: {{ .Values.backend.volumes.secretName }}
+            items:
+              - key: application-secrets.properties
+                path: application-secrets.properties
