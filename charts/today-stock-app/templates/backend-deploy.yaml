@@ -33,6 +33,13 @@ spec:
               value: framework
             - name: SPRING_CONFIG_IMPORT
               value: optional:file:/etc/backend-secrets/application-secrets.properties
+            - name: JAVA_TOOL_OPTIONS
+              value: >-
+                -XX:MaxRAMPercentage=60
+                -XX:InitialRAMPercentage=40
+                -XX:MaxDirectMemorySize=384m
+                -XX:+ExitOnOutOfMemoryError
+                -Xlog:gc*:file=/tmp/gc.log:tags,uptime,level
           volumeMounts:
             - name: backend-secret-vol
               mountPath: /etc/backend-secrets
